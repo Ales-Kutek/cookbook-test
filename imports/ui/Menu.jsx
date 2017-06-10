@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
@@ -22,11 +23,17 @@ class Menu extends Component {
         this.setState({ open: !this.state.open });
     }
 
+    redirectTo() {
+        return (
+            <Redirect to="/category" />
+        )
+    }
+
     render() {
         return (
 
         <div>
-            <AppBar title="React Toolbox" leftIcon="menu" onLeftIconClick={this.handleToggle}>
+            <AppBar title="Kuchařka" leftIcon="menu" onLeftIconClick={this.handleToggle}>
                 <Navigation type="horizontal"/>
             </AppBar>
 
@@ -34,7 +41,17 @@ class Menu extends Component {
                 <Drawer active={this.state.open} onOverlayClick={this.handleToggle}>
                     <List selectable ripple>
                         <ListItem
-                            caption='Dr. Manhattan'
+                            caption='Kategorie'
+                            leftIcon="folder"
+                            onClick={this.redirectTo}
+                        />
+                        <ListItem
+                            caption='Recepty'
+                            leftIcon="note"
+                        />
+                        <ListItem
+                            caption='Něco dalšího'
+                            leftIcon="settings"
                         />
                     </List>
                 </Drawer>
