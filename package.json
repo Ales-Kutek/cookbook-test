@@ -21,7 +21,10 @@
   "reactToolbox": {
   "include": [
     "BUTTON",
-    "DATE_PICKER"
+    "DATE_PICKER",
+    "APP_BAR",
+    "NAVIGATION",
+    "LINK"
   ],
   "customProperties": {
     "animation-duration": "0.3s",

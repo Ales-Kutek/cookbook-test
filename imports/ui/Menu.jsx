@@ -4,6 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Navigation from 'react-toolbox/lib/navigation/Navigation';
 import Link from 'react-toolbox/lib/link/Link';
+import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 
 class Menu extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class Menu extends Component {
     render() {
         return (
             <div>
-                <AppBar title='React Toolbox' leftIcon='menu'>
+                <AppBar leftIcon='menu'>
                     <Navigation type='horizontal'>
                         <Link href='http://' label='Inbox' icon='inbox' />
                         <Link href='http://' active label='Profile' icon='person' />
