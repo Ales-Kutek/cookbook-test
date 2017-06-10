@@ -3,7 +3,12 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Navigation from 'react-toolbox/lib/navigation/Navigation';
+import Button from 'react-toolbox/lib/button/Button';
+import Drawer from 'react-toolbox/lib/drawer/Drawer';
 import Link from 'react-toolbox/lib/link/Link';
+import List from 'react-toolbox/lib/list/List';
+import ListItem from 'react-toolbox/lib/list/ListItem';
+import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 
 class Menu extends Component {
@@ -20,12 +25,21 @@ class Menu extends Component {
     render() {
         return (
 
-        <AppBar title="React Toolbox" leftIcon="menu">
-            <Navigation type="horizontal">
-                <Link href="http://" label="Inbox" icon="inbox" />
-                <Link href="http://" active label="Profile" icon="person" />
-            </Navigation>
-        </AppBar>
+        <div>
+            <AppBar title="React Toolbox" leftIcon="menu" onLeftIconClick={this.handleToggle}>
+                <Navigation type="horizontal"/>
+            </AppBar>
+
+            <div>
+                <Drawer active={this.state.open} onOverlayClick={this.handleToggle}>
+                    <List selectable ripple>
+                        <ListItem
+                            caption='Dr. Manhattan'
+                        />
+                    </List>
+                </Drawer>
+            </div>
+        </div>
         )
     }
 }
