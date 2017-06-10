@@ -11,12 +11,12 @@ class App extends Component {
         return (
             <div>
                 <Menu/>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path="/" component={CategoryList}/>
-                        <Route path="/detail" component={CategoryList}/>
-                    </Switch>
-                </BrowserRouter>
+                {/*<BrowserRouter>*/}
+                    {/*<Switch>*/}
+                        {/*<Route path="/" component={CategoryList}/>*/}
+                        {/*<Route path="/detail" component={CategoryList}/>*/}
+                    {/*</Switch>*/}
+                {/*</BrowserRouter>*/}
             </div>
         )
     }

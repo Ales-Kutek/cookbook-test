@@ -5,11 +5,14 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 import App from '../imports/ui/App.jsx';
 
+import theme from '../imports/api/theme'
+import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
+
 Meteor.startup(() => {
     render(
-        <BrowserRouter>
-            <Route path="/" component={App}/>
-        </BrowserRouter>
+        <ThemeProvider theme={theme}>
+            <App/>
+        </ThemeProvider>
 
         ,document.getElementById('render-target'));
 });
