@@ -1,1 +1,9 @@
 /* CSS declarations go here */
+.pointer {
+    cursor: pointer;
+}
+
+.deleteX {
+    color: red;
+    padding-right: 6px;
+}

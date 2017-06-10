@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
+
 import {Categories} from "../api/categories";
 import {Recipes} from "../api/recipe";
 import Category from "./Category.jsx";
