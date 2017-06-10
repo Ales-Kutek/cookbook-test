@@ -8,6 +8,7 @@
   "dependencies": {
     "babel-runtime": "^6.20.0",
     "meteor-node-stubs": "~0.2.4",
+    "node-sass": "^3.13.1",
     "react": "^15.5.4",
     "react-addons-pure-render-mixin": "^15.5.2",
     "react-dom": "^15.5.4",
@@ -15,24 +16,26 @@
     "react-toolbox": "^2.0.0-beta.12"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.1",
-    "node-sass": "^3.4.2"
+    "autoprefixer": "^7.1.1"
+  },
+  "peerDependencies": {
+    "react-toolbox": "^2.0.0-beta.8"
   },
   "reactToolbox": {
-  "include": [
-    "BUTTON",
-    "DATE_PICKER",
-    "APP_BAR",
-    "NAVIGATION",
-    "LINK"
-  ],
-  "customProperties": {
-    "animation-duration": "0.3s",
-    "color-accent": "var(--palette-pink-a200)",
-    "color-accent-dark": "var(--palette-pink-700)",
-    "color-primary-contrast": "var(--color-dark-contrast)",
-    "color-accent-contrast": "var(--color-dark-contrast)"
-  },
-  "output": "assets/react-toolbox"
-}
+    "include": [
+      "BUTTON",
+      "DATE_PICKER",
+      "APP_BAR",
+      "NAVIGATION",
+      "LINK"
+    ],
+    "customProperties": {
+      "animation-duration": "0.3s",
+      "color-accent": "var(--palette-pink-a200)",
+      "color-accent-dark": "var(--palette-pink-700)",
+      "color-primary-contrast": "var(--color-dark-contrast)",
+      "color-accent-contrast": "var(--color-dark-contrast)"
+    },
+    "output": "assets/react-toolbox"
+  }
 }
