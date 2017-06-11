@@ -14,6 +14,7 @@ import TableHead from 'react-toolbox/lib/table/TableHead';
 import TableCell from 'react-toolbox/lib/table/TableCell';
 import TableRow from 'react-toolbox/lib/table/TableRow';
 import Button from 'react-toolbox/lib/button/Button';
+import Dialog from 'react-toolbox/lib/dialog/Dialog';
 import Drawer from 'react-toolbox/lib/drawer/Drawer';
 import Link from 'react-toolbox/lib/link/Link';
 import List from 'react-toolbox/lib/list/List';
@@ -27,34 +28,16 @@ class CategoryList extends Component {
 
         this.state = {
             recipeError: false,
-            categoryError: false
+            categoryError: false,
+            activeAdd: false
         };
-    }
-
-    addNewSubmitCategory(e) {
-        e.preventDefault();
-
-        const node = ReactDOM.findDOMNode(this.refs.addNewCategory);
-        let text = node.value;
-
-        if (text === "") {
-            this.setState({categoryError: true});
-        } else {
-            this.setState({categoryError: false});
-            Categories.insert({
-                title: text,
-                created: new Date()
-            });
-
-            node.value = "";
-        }
     }
 
     renderAddNewForm() {
         let newCatClassValue = this.state.categoryError ? "has-error" : "";
 
         return (
-            <form className="add-new-category" onSubmit={this.addNewSubmitCategory.bind(this)}>
+            <form className="add-new-category">
                 <label htmlFor="addNewCategory">Category</label>
                 <div className={newCatClassValue}>
                     <input
@@ -65,91 +48,76 @@ class CategoryList extends Component {
                         id="addNewCategory"
                         />
                 </div>
-
-                <br/>
-
-                <input type="submit" value="Send" className="form-control"/>
             </form>
         )
     }
 
-
-    addNewSubmitRecipe(e) {
-        e.preventDefault();
-
-        const textNode = ReactDOM.findDOMNode(this.refs.addNewRecipeText);
-        const categoryNode = ReactDOM.findDOMNode(this.refs.addNewRecipeCategory);
-
-        let text = textNode.value.trim();
-        let category = categoryNode.value;
+    addNewSubmitCategory() {
+        const node = ReactDOM.findDOMNode(this.refs.addNewCategory);
+        let text = node.value;
 
         if (text === "") {
-            this.setState({recipeError: true});
-        } else {
-            this.setState({recipeError: false});
+            this.setState({categoryError: true});
 
-            Recipes.insert({
-                created: new Date(),
+            return false;
+        } else {
+            this.setState({categoryError: false});
+            Categories.insert({
                 title: text,
-                category: category
+                created: new Date()
             });
 
-            textNode.value = "";
+            this.handleToggle();
+            node.value = "";
         }
-    }
 
-    renderAddNewRecipe() {
-        let newRecpClassValue = this.state.recipeError ? "has-error" : "";
-
-        return (
-            <form className="add-new-recipe" onSubmit={this.addNewSubmitRecipe.bind(this)}>
-                <label htmlFor="addNewRecipeText">Recipe name</label>
-                <div className={newRecpClassValue}>
-                    <input
-                    ref="addNewRecipeText"
-                    type="text"
-                    placeholder="add new recipe.."
-                    className="form-control"
-                    id="addNewRecipeText"
-                    />
-                </div>
-
-                <br/>
-
-                <label htmlFor="addNewRecipeCategory">Category</label>
-                 <select ref="addNewRecipeCategory" className="form-control" id="addNewRecipeCategory">
-                     {this.renderCategories("option")}
-                 </select>
-
-                <br/>
-
-                <input type="submit" value="Send" className="form-control"/>
-            </form>
-        )
-    }
-
-    renderCategories() {
-        return this.props.categories.map((category) => (
-            <Category key={category._id} category={category}/>
-        ));
+        return true;
     }
 
     render() {
         return (
-            <Table>
-                <TableHead>
-                    <TableCell>Název kategorie</TableCell>
-                    <TableCell>Založena</TableCell>
-                    <TableCell>Smazat</TableCell>
-                </TableHead>
-                {this.props.categories.map((item, idx) => (
-                    <TableRow key={idx}>
-                        <TableCell>{item.title}</TableCell>
-                        <TableCell>{item.created.toDateString()}</TableCell>
-                        <TableCell><span onClick={this.removeCategory(item._id)} className="material-icons">delete</span></TableCell>
-                    </TableRow>
-                ))}
-            </Table>
+            <div>
+                {this.renderDialog()}
+                <Table>
+                    <TableHead>
+                        <TableCell>Název kategorie</TableCell>
+                        <TableCell>Založena</TableCell>
+                        <TableCell>Smazat</TableCell>
+                    </TableHead>
+                    {this.props.categories.map((item, idx) => (
+                        <TableRow key={idx}>
+                            <TableCell>{item.title}</TableCell>
+                            <TableCell>{item.created.toDateString()}</TableCell>
+                            <TableCell><span onClick={this.removeCategory(item._id)} className="material-icons">delete</span></TableCell>
+                        </TableRow>
+                    ))}
+                </Table>
+            </div>
+        )
+    }
+
+    handleToggle = () => {
+        this.setState({activeAdd: !this.state.activeAdd});
+    };
+
+    actions = [
+        { label: "Cancel", onClick: this.handleToggle },
+        { label: "Save", onClick: this.addNewSubmitCategory.bind(this)}
+    ];
+
+    renderDialog() {
+        return (
+            <div>
+                <Button label='Přidat kategorii' onClick={this.handleToggle} />
+                <Dialog
+                active={this.state.activeAdd}
+                actions={this.actions}
+                onEscKeyDown={this.handleToggle}
+                onOverlayClick={this.handleToggle}
+                title='Přidat novou kategorii'>
+                    {this.renderAddNewForm()}
+                </Dialog>
+            </div>
         )
     }
 
