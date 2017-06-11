@@ -11,6 +11,12 @@ import ListItem from 'react-toolbox/lib/list/ListItem';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 
+import { NavLink } from 'react-router-dom';
+
+import { Route, Redirect } from 'react-router'
+
+import history from '../api/history';
+
 class Menu extends Component {
     constructor(props) {
         super(props);
@@ -34,22 +40,25 @@ class Menu extends Component {
             <div>
                 <Drawer active={this.state.open} onOverlayClick={this.handleToggle}>
                     <List selectable ripple>
+
+                        <NavLink to="/category">Category</NavLink>
+
                         <ListItem
-                            caption='Domů'
                             leftIcon="home"
                             onClick={() => {
-                                route.go("/")
+                                history.push('/');
                                 this.handleToggle()
                             }}
-                        />
+                        >
+                            <NavLink exact to="/">Domů</NavLink>
+                        </ListItem>
                         <ListItem
-                            caption='Kategorie'
                             leftIcon="folder"
                             onClick={() => {
-                                route.go("/category")
+                                history.push('category');
                                 this.handleToggle()
                             }}
-                        />
+                        ><NavLink exact to="/">Kategorie</NavLink></ListItem>
                         <ListItem
                             caption='Recepty'
                             leftIcon="note"

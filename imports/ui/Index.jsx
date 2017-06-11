@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react';
 
 import Layout from 'react-toolbox/lib/layout/Layout';
 
+import history from '../api/history';
+
+import { Route, Redirect } from 'react-router'
 
 export default class Index extends Component {
     render() {

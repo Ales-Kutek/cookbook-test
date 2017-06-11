@@ -1,38 +1,34 @@
 import React, {Component, PropTypes} from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Router, Route } from 'react-router';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { Route, Router, Switch } from 'react-router';
+// import { BrowserRouter as Router } from 'react-router-dom'
+
+import history from '../api/history';
 
 import Menu from './Menu'
+import Layout from './Layout'
+
 import Index from './Index'
 import CategoryList from './Category/CategoryList'
 
 import theme from '../api/theme'
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 
-const browserHistory = createBrowserHistory();
 
 class App extends Component {
     constructor(props) {
         super(props);
-
-        console.log(props);
     }
 
     render() {
         return (
-            <div>
-                <Router history={browserHistory}>
-                    <div>
-                        <Menu/>
-                        <Route exact path="/" component={Index}/>
-                        <Route path="/category" component={CategoryList}/>
-                        {/*<Route path="signin" component={AuthPageSignIn}/>*/}
-                        {/*<Route path="join" component={AuthPageJoin}/>*/}
-                        {/*<Route path="*" component={NotFoundPage}/>*/}
-                    </div>
-                </Router>
-            </div>
+            <Router history={history}>
+                <Switch>
+                    <Menu/>
+                    <Route exact path="/" component={Index}/>
+                    <Route path="/category" component={CategoryList}/>
+                </Switch>
+            </Router>
         )
     }
 }
