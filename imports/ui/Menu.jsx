@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import route from '../routing/router';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Navigation from 'react-toolbox/lib/navigation/Navigation';
@@ -34,9 +35,20 @@ class Menu extends Component {
                 <Drawer active={this.state.open} onOverlayClick={this.handleToggle}>
                     <List selectable ripple>
                         <ListItem
+                            caption='Domů'
+                            leftIcon="home"
+                            onClick={() => {
+                                route.go("/")
+                                this.handleToggle()
+                            }}
+                        />
+                        <ListItem
                             caption='Kategorie'
                             leftIcon="folder"
-                            onClick={this.redirectTo}
+                            onClick={() => {
+                                route.go("/category")
+                                this.handleToggle()
+                            }}
                         />
                         <ListItem
                             caption='Recepty'

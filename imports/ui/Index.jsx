@@ -1,16 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import Menu from './Menu'
-import CategoryList from './CategoryList';
-
-import theme from '../api/theme'
-import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import route from '/imports/routing/router.js';
+
+import Layout from 'react-toolbox/lib/layout/Layout';
+
 
 export default class Index extends Component {
     render() {
         return(
-            <div>
-                <Menu/>
+            <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem' }}>
+                <h1>Tohle je hlavní stránka</h1>
             </div>
         )
     }
