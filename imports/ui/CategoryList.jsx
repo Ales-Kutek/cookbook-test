@@ -154,7 +154,7 @@ class CategoryList extends Component {
 }
 
 CategoryList.propTypes = {
-    categories: PropTypes.array.isRequired
+    categories: PropTypes.array.isRequired,
 };
 
 export default createContainer(() => {

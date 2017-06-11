@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
@@ -21,12 +20,6 @@ class Menu extends Component {
 
     handleToggle() {
         this.setState({ open: !this.state.open });
-    }
-
-    redirectTo() {
-        return (
-            <Redirect to="/category" />
-        )
     }
 
     render() {
