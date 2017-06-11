@@ -14,6 +14,7 @@ import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 class Menu extends Component {
     constructor(props) {
         super(props);
+
         this.handleToggle = this.handleToggle.bind(this);
         this.state = { open: false };
     }
@@ -65,7 +66,7 @@ class Menu extends Component {
     }
 }
 
-export default createContainer(() => {
+export default createContainer((object) => {
     return {
     };
 }, Menu);
