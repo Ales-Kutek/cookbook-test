@@ -37,10 +37,11 @@ class CategoryList extends Component {
         let newCatClassValue = this.state.categoryError ? "has-error" : "";
 
         return (
-            <form className="add-new-category">
+            <form className="add-new-category" onSubmit={this.addNewSubmitCategory.bind(this)}>
                 <label htmlFor="addNewCategory">Category</label>
                 <div className={newCatClassValue}>
                     <input
+                        autoFocus={true}
                         ref="addNewCategory"
                         type="text"
                         placeholder="add new category..."
@@ -52,14 +53,14 @@ class CategoryList extends Component {
         )
     }
 
-    addNewSubmitCategory() {
+    addNewSubmitCategory(e) {
+        e.preventDefault();
+
         const node = ReactDOM.findDOMNode(this.refs.addNewCategory);
         let text = node.value;
 
         if (text === "") {
             this.setState({categoryError: true});
-
-            return false;
         } else {
             this.setState({categoryError: false});
             Categories.insert({
@@ -71,29 +72,7 @@ class CategoryList extends Component {
             node.value = "";
         }
 
-        return true;
-    }
-
-    render() {
-        return (
-            <div>
-                {this.renderDialog()}
-                <Table>
-                    <TableHead>
-                        <TableCell>Název kategorie</TableCell>
-                        <TableCell>Založena</TableCell>
-                        <TableCell>Smazat</TableCell>
-                    </TableHead>
-                    {this.props.categories.map((item, idx) => (
-                        <TableRow key={idx}>
-                            <TableCell>{item.title}</TableCell>
-                            <TableCell>{item.created.toDateString()}</TableCell>
-                            <TableCell><span onClick={this.removeCategory(item._id)} className="material-icons">delete</span></TableCell>
-                        </TableRow>
-                    ))}
-                </Table>
-            </div>
-        )
+        return false;
     }
 
     handleToggle = () => {
@@ -121,14 +100,35 @@ class CategoryList extends Component {
         )
     }
 
+    render() {
+        return (
+            <div>
+                {this.renderDialog()}
+                <Table>
+                    <TableHead>
+                        <TableCell>Název kategorie</TableCell>
+                        <TableCell>Založena</TableCell>
+                        <TableCell>Smazat</TableCell>
+                    </TableHead>
+                    {this.props.categories.map((item, idx) => (
+                        <TableRow key={idx}>
+                            <TableCell>{item.title}</TableCell>
+                            <TableCell>{item.created.toDateString()}</TableCell>
+                            <TableCell><span onClick={this.removeCategory(item._id)} className="pointer material-icons">delete</span></TableCell>
+                        </TableRow>
+                    ))}
+                </Table>
+            </div>
+        )
+    }
+
     removeCategory(id) {
-        console.log("remove");
-
-        return;
-
-        Categories.remove({
-            _id: id
-        });
+        /** bind funkce */
+        return function (e) {
+            Categories.remove({
+                _id: id
+            });
+        }.bind(this);
     }
 }
 
