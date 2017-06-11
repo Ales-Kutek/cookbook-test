@@ -1,27 +1,21 @@
 import React, {Component, PropTypes} from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { BrowserRouter, Route } from 'react-router-dom'
-import { Switch } from 'react-router';
-
 import Menu from './Menu'
 import CategoryList from './CategoryList';
 
-class App extends Component {
-    render() {
-        return (
-            <div>
-                <Menu/>
-                <BrowserRouter>
-                    <Switch>
-                        <Route path="/category" component={CategoryList}/>
-                    </Switch>
-                </BrowserRouter>
-            </div>
-        )
-    }
-}
+import theme from '../api/theme'
+import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 
-export default createContainer(() => {
-    return {
-    };
-}, App);
+export default ({main, routeProps}) => {
+    // main represents the component to render passed from the router
+    // route props represent the properties that it receives from the router
+
+    // where we do createElement, that's where your components will get rendered.
+    return (
+        <div id="app">
+            <ThemeProvider theme={theme}>
+                {React.createElement(main, routeProps)}
+            </ThemeProvider>
+        </div>
+    )
+};

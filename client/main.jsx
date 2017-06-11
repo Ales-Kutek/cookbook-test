@@ -1,18 +1,7 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { render } from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom'
+import {Meteor} from 'meteor/meteor';
 
-import App from '../imports/ui/App.jsx';
-
-import theme from '../imports/api/theme'
-import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
+import '/imports/routing';
 
 Meteor.startup(() => {
-    render(
-        <ThemeProvider theme={theme}>
-            <App/>
-        </ThemeProvider>
-
-        ,document.getElementById('render-target'));
 });
