@@ -14,6 +14,9 @@ export default ({main, routeProps}) => {
     return (
         <div id="app">
             <ThemeProvider theme={theme}>
+                <Menu/>
+            </ThemeProvider>
+            <ThemeProvider theme={theme}>
                 {React.createElement(main, routeProps)}
             </ThemeProvider>
         </div>
