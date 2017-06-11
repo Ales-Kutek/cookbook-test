@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
 
-import {Categories} from "../api/categories";
-import {Recipes} from "../api/recipe";
+import {Categories} from "../../api/categories";
+import {Recipes} from "../../api/recipe";
 import Category from "./Category.jsx";
+
+import route from '../../routing/router';
 
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Navigation from 'react-toolbox/lib/navigation/Navigation';
@@ -18,6 +20,7 @@ import Dialog from 'react-toolbox/lib/dialog/Dialog';
 import Drawer from 'react-toolbox/lib/drawer/Drawer';
 import Link from 'react-toolbox/lib/link/Link';
 import List from 'react-toolbox/lib/list/List';
+import Input from 'react-toolbox/lib/input/Input';
 import ListItem from 'react-toolbox/lib/list/ListItem';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
@@ -38,15 +41,12 @@ class CategoryList extends Component {
 
         return (
             <form className="add-new-category" onSubmit={this.addNewSubmitCategory.bind(this)}>
-                <label htmlFor="addNewCategory">Category</label>
                 <div className={newCatClassValue}>
-                    <input
+                    <Input
                         autoFocus={true}
                         ref="addNewCategory"
                         type="text"
-                        placeholder="add new category..."
-                        className="form-control"
-                        id="addNewCategory"
+                        placeholder="název kategorie"
                         />
                 </div>
             </form>
@@ -56,8 +56,8 @@ class CategoryList extends Component {
     addNewSubmitCategory(e) {
         e.preventDefault();
 
-        const node = ReactDOM.findDOMNode(this.refs.addNewCategory);
-        let text = node.value;
+        const node = ReactDOM.findDOMNode(this.refs.addNewCategory).childNodes[0];
+        let text = node.value.trim();
 
         if (text === "") {
             this.setState({categoryError: true});
@@ -80,8 +80,8 @@ class CategoryList extends Component {
     };
 
     actions = [
-        { label: "Cancel", onClick: this.handleToggle },
-        { label: "Save", onClick: this.addNewSubmitCategory.bind(this)}
+        { label: "Zrušit", onClick: this.handleToggle },
+        { label: "Uložit", onClick: this.addNewSubmitCategory.bind(this)}
     ];
 
     renderDialog() {
@@ -108,13 +108,16 @@ class CategoryList extends Component {
                     <TableHead>
                         <TableCell>Název kategorie</TableCell>
                         <TableCell>Založena</TableCell>
-                        <TableCell>Smazat</TableCell>
+                        <TableCell>Akce</TableCell>
                     </TableHead>
                     {this.props.categories.map((item, idx) => (
                         <TableRow key={idx}>
                             <TableCell>{item.title}</TableCell>
                             <TableCell>{item.created.toDateString()}</TableCell>
-                            <TableCell><span onClick={this.removeCategory(item._id)} className="pointer material-icons">delete</span></TableCell>
+                            <TableCell>
+                                <span onClick={this.removeCategory(item._id)} className="pointer material-icons">delete</span>
+                                <span onClick={function() {route.go('/category/detail/:_id', {_id: item._id})}} className="pointer material-icons">search</span>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </Table>
