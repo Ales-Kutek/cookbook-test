@@ -7,8 +7,6 @@ import {Categories} from "../../api/categories";
 import {Recipes} from "../../api/recipe";
 import Category from "./Category.jsx";
 
-import route from '../../routing/router';
-
 import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Navigation from 'react-toolbox/lib/navigation/Navigation';
 import Table from 'react-toolbox/lib/table/Table';

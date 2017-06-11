@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import route from '/imports/routing/router.js';
 
 import Layout from 'react-toolbox/lib/layout/Layout';
 
