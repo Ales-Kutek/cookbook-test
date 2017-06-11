@@ -7,6 +7,20 @@ import {Categories} from "../api/categories";
 import {Recipes} from "../api/recipe";
 import Category from "./Category.jsx";
 
+import AppBar from 'react-toolbox/lib/app_bar/AppBar';
+import Navigation from 'react-toolbox/lib/navigation/Navigation';
+import Table from 'react-toolbox/lib/table/Table';
+import TableHead from 'react-toolbox/lib/table/TableHead';
+import TableCell from 'react-toolbox/lib/table/TableCell';
+import TableRow from 'react-toolbox/lib/table/TableRow';
+import Button from 'react-toolbox/lib/button/Button';
+import Drawer from 'react-toolbox/lib/drawer/Drawer';
+import Link from 'react-toolbox/lib/link/Link';
+import List from 'react-toolbox/lib/list/List';
+import ListItem from 'react-toolbox/lib/list/ListItem';
+import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
+import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
+
 class CategoryList extends Component {
     constructor(props) {
         super(props);
@@ -15,18 +29,6 @@ class CategoryList extends Component {
             recipeError: false,
             categoryError: false
         };
-    }
-
-    renderCategories(render) {
-        if (render === undefined) {
-            render = "li";
-        }
-
-        let map = this.props.categories.map((category) => (
-            <Category key={category._id} category={category} render={render}/>
-        ));
-
-        return map;
     }
 
     addNewSubmitCategory(e) {
@@ -47,7 +49,6 @@ class CategoryList extends Component {
             node.value = "";
         }
     }
-
 
     renderAddNewForm() {
         let newCatClassValue = this.state.categoryError ? "has-error" : "";
@@ -71,6 +72,7 @@ class CategoryList extends Component {
             </form>
         )
     }
+
 
     addNewSubmitRecipe(e) {
         e.preventDefault();
@@ -126,30 +128,39 @@ class CategoryList extends Component {
         )
     }
 
+    renderCategories() {
+        return this.props.categories.map((category) => (
+            <Category key={category._id} category={category}/>
+        ));
+    }
+
     render() {
         return (
-            <div>
-                <div className="row">
-                    <div className="col-md-6">
-                        <h2>Add new category</h2>
-                        {this.renderAddNewForm()}
-                    </div>
-
-                    <div className="col-md-6">
-                        <h2>Add new recipe</h2>
-                        {this.renderAddNewRecipe()}
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-md-12">
-                        <h1 className="text-center">Result</h1>
-                        <ul className="list-group">
-                            {this.renderCategories()}
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <Table>
+                <TableHead>
+                    <TableCell>Název kategorie</TableCell>
+                    <TableCell>Založena</TableCell>
+                    <TableCell>Smazat</TableCell>
+                </TableHead>
+                {this.props.categories.map((item, idx) => (
+                    <TableRow key={idx}>
+                        <TableCell>{item.title}</TableCell>
+                        <TableCell>{item.created.toDateString()}</TableCell>
+                        <TableCell><span onClick={this.removeCategory(item._id)} className="material-icons">delete</span></TableCell>
+                    </TableRow>
+                ))}
+            </Table>
         )
+    }
+
+    removeCategory(id) {
+        console.log("remove");
+
+        return;
+
+        Categories.remove({
+            _id: id
+        });
     }
 }
 
