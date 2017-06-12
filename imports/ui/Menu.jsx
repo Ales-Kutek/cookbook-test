@@ -13,7 +13,7 @@ import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 
 import { Link } from 'react-router-dom';
 
-import { Route, Redirect } from 'react-router'
+import { Route, Redirect } from 'react-router';
 
 import history from '../api/history';
 
@@ -44,7 +44,7 @@ class Menu extends Component {
                 <Navigation type="horizontal"/>
             </AppBar>
 
-            {this.state.redirect !== "" ? <Redirect to={this.state.redirect}/> : ""}
+            {this.state.redirect !== "" ? <Redirect push to={this.state.redirect}/> : ""}
             {this.state.redirect = ""}
 
             <div>

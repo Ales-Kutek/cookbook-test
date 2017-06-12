@@ -1,21 +1,14 @@
 import React, {Component, PropTypes} from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
-import { Route, Router, Switch } from 'react-router';
-
-import history from '../api/history';
+import {createContainer} from 'meteor/react-meteor-data';
+import {Route, Router, Switch} from 'react-router';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import Menu from './Menu'
-import Layout from './Layout'
-
 import Index from './Index'
 import CategoryList from './Category/CategoryList'
+import CategoryDetail from "./Category/CategoryDetail";
 
-import theme from '../api/theme'
-import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
-
-import createBrowserHistory from 'history/createBrowserHistory';
 const browserHistory = createBrowserHistory();
-
 
 class App extends Component {
     constructor(props) {
@@ -30,6 +23,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={Index}/>
                         <Route exact path="/category" component={CategoryList}/>
+                        <Route exact path="/category/detail/:id" component={CategoryDetail}/>
                     </Switch>
                 </div>
             </Router>
@@ -38,8 +32,6 @@ class App extends Component {
 }
 
 export default createContainer((object) => {
-    return {
-
-    };
+    return {};
 
 }, App);

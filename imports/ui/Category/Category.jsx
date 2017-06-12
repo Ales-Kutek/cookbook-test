@@ -16,8 +16,10 @@ import TableRow from 'react-toolbox/lib/table/TableRow';
 
 class Category extends Component {
     render() {
+        console.log(this.props.category);
+
         return(
-            <Card style={{width: '350px'}}>
+            <Card style={{width: "100%"}}>
                 <CardTitle
                     title={this.props.category.title}
                 />

@@ -9,3 +9,7 @@
     color: red;
     padding-right: 6px;
 }
+
+.marginFromTopDefault {
+    margin-top: 16px;
+}

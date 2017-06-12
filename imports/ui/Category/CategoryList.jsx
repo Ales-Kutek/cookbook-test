@@ -23,15 +23,37 @@ import ListItem from 'react-toolbox/lib/list/ListItem';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 
+import { Route, Redirect } from 'react-router';
+
+
 class CategoryList extends Component {
     constructor(props) {
         super(props);
 
+        console.log(this.props);
+
         this.state = {
             recipeError: false,
             categoryError: false,
-            activeAdd: false
+            activeAdd: false,
+            redirect: ""
         };
+    }
+
+    removeCategory(id) {
+        /** bind funkce */
+        return function (e) {
+            Categories.remove({
+                _id: id
+            });
+        }.bind(this);
+    }
+
+    redirectTo(to) {
+
+        return function (e) {
+            this.setState({redirect: to});
+        }.bind(this);
     }
 
     renderAddNewForm() {
@@ -101,6 +123,9 @@ class CategoryList extends Component {
     render() {
         return (
             <div>
+                {this.state.redirect !== "" ? <Redirect push to={this.state.redirect}/> : ""}
+                {this.state.redirect = ""}
+
                 {this.renderDialog()}
                 <Table>
                     <TableHead>
@@ -114,22 +139,13 @@ class CategoryList extends Component {
                             <TableCell>{item.created.toDateString()}</TableCell>
                             <TableCell>
                                 <span onClick={this.removeCategory(item._id)} className="pointer material-icons">delete</span>
-                                <span onClick={function() {route.go('/category/detail/:_id', {_id: item._id})}} className="pointer material-icons">search</span>
+                                <span onClick={this.redirectTo("/category/detail/" + item._id)} className="pointer material-icons">search</span>
                             </TableCell>
                         </TableRow>
                     ))}
                 </Table>
             </div>
         )
-    }
-
-    removeCategory(id) {
-        /** bind funkce */
-        return function (e) {
-            Categories.remove({
-                _id: id
-            });
-        }.bind(this);
     }
 }
 
