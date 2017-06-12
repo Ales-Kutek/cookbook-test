@@ -30,8 +30,6 @@ class CategoryList extends Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props);
-
         this.state = {
             recipeError: false,
             categoryError: false,

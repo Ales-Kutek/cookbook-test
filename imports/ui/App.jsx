@@ -33,5 +33,4 @@ class App extends Component {
 
 export default createContainer((object) => {
     return {};
-
 }, App);

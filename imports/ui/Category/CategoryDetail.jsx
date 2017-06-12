@@ -4,20 +4,20 @@ import {createContainer} from 'meteor/react-meteor-data';
 import Category from "./Category";
 import {Categories} from "../../api/categories";
 
+import { Route, Redirect } from 'react-router';
+
 class CategoryDetail extends Component {
     constructor(props) {
         super(props);
     }
 
     mapAndRenderCategory() {
-
-        console.log(Categories.find().fetch());
-
-        let category = Categories.findOne({slug: this.props.slug});
-
-        console.log(this.props.slug);
-
-        return (<Category key={category._id} category={category}/>);
+        let category = this.props.category;
+        if (category !== undefined) {
+            return (<Category key={category._id} category={category}/>);
+        } else {
+            return (<Redirect to="/"/>);
+        }
     }
 
     render() {
@@ -34,9 +34,9 @@ CategoryDetail.PropTypes = {
 };
 
 export default createContainer((object) => {
-    console.log(object);
-
+    let slug = object.match.params["id"];
     return {
-        slug: object.match.params["id"]
+        slug: slug,
+        category: Categories.findOne({slug: slug})
     };
 }, CategoryDetail);
