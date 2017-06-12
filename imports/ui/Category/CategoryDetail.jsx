@@ -13,10 +13,9 @@ class CategoryDetail extends Component {
 
     mapAndRenderCategory() {
         let category = this.props.category;
+
         if (category !== undefined) {
             return (<Category key={category._id} category={category}/>);
-        } else {
-            return (<Redirect to="/"/>);
         }
     }
 
