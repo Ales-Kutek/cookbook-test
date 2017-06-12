@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Route, Router, Switch } from 'react-router';
-// import { BrowserRouter as Router } from 'react-router-dom'
 
 import history from '../api/history';
 
@@ -14,6 +13,9 @@ import CategoryList from './Category/CategoryList'
 import theme from '../api/theme'
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 
+import createBrowserHistory from 'history/createBrowserHistory';
+const browserHistory = createBrowserHistory();
+
 
 class App extends Component {
     constructor(props) {
@@ -22,12 +24,14 @@ class App extends Component {
 
     render() {
         return (
-            <Router history={history}>
-                <Switch>
+            <Router history={browserHistory}>
+                <div>
                     <Menu/>
-                    <Route exact path="/" component={Index}/>
-                    <Route path="/category" component={CategoryList}/>
-                </Switch>
+                    <Switch>
+                        <Route exact path="/" component={Index}/>
+                        <Route exact path="/category" component={CategoryList}/>
+                    </Switch>
+                </div>
             </Router>
         )
     }

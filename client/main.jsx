@@ -18,15 +18,9 @@ const browserHistory = createBrowserHistory();
 
 Meteor.startup(() => {
     render(
-        <Router history={browserHistory}>
-            <div className="container">
-                <Menu/>
-                <Switch>
-                    <Route exact path="/" component={Index}/>
-                    <Route exact path="/category" component={CategoryList}/>
-                </Switch>
-            </div>
-        </Router>
+            <ThemeProvider theme={theme}>
+                <App/>
+            </ThemeProvider>
 
         , document.getElementById("render-target"));
 });

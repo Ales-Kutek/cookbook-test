@@ -5,13 +5,13 @@ import AppBar from 'react-toolbox/lib/app_bar/AppBar';
 import Navigation from 'react-toolbox/lib/navigation/Navigation';
 import Button from 'react-toolbox/lib/button/Button';
 import Drawer from 'react-toolbox/lib/drawer/Drawer';
-import Link from 'react-toolbox/lib/link/Link';
+// import Link from 'react-toolbox/lib/link/Link';
 import List from 'react-toolbox/lib/list/List';
 import ListItem from 'react-toolbox/lib/list/ListItem';
 import ListSubHeader from 'react-toolbox/lib/list/ListSubHeader';
 import DatePicker from 'react-toolbox/lib/date_picker/DatePicker';
 
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Route, Redirect } from 'react-router'
 
@@ -22,11 +22,18 @@ class Menu extends Component {
         super(props);
 
         this.handleToggle = this.handleToggle.bind(this);
-        this.state = { open: false };
+        this.state = {
+            open: false,
+            redirect: ""
+        };
     }
 
     handleToggle() {
         this.setState({ open: !this.state.open });
+    }
+
+    redirectTo(to) {
+        this.setState({redirect: to});
     }
 
     render() {
@@ -37,28 +44,15 @@ class Menu extends Component {
                 <Navigation type="horizontal"/>
             </AppBar>
 
+            {this.state.redirect !== "" ? <Redirect to={this.state.redirect}/> : ""}
+            {this.state.redirect = ""}
+
             <div>
                 <Drawer active={this.state.open} onOverlayClick={this.handleToggle}>
                     <List selectable ripple>
+                        <ListItem caption="Domů" leftIcon="home" onClick={() => {this.handleToggle();this.redirectTo("/")}}/>
+                        <ListItem caption="Kategorie" leftIcon="folder" onClick={() => {this.handleToggle();this.redirectTo("/category")}}/>
 
-                        <NavLink to="/category">Category</NavLink>
-
-                        <ListItem
-                            leftIcon="home"
-                            onClick={() => {
-                                history.push('/');
-                                this.handleToggle()
-                            }}
-                        >
-                            <NavLink exact to="/">Domů</NavLink>
-                        </ListItem>
-                        <ListItem
-                            leftIcon="folder"
-                            onClick={() => {
-                                history.push('category');
-                                this.handleToggle()
-                            }}
-                        ><NavLink exact to="/">Kategorie</NavLink></ListItem>
                         <ListItem
                             caption='Recepty'
                             leftIcon="note"
