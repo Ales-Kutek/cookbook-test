@@ -1,3 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 
-export const Categories = new Mongo.Collection("categories");
+let Cats = new Mongo.Collection("categories");
+Cats.friendlySlugs("title");
+
+export const Categories = Cats;

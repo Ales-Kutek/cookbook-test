@@ -139,7 +139,7 @@ class CategoryList extends Component {
                             <TableCell>{item.created.toDateString()}</TableCell>
                             <TableCell>
                                 <span onClick={this.removeCategory(item._id)} className="pointer material-icons">delete</span>
-                                <span onClick={this.redirectTo("/category/detail/" + item._id)} className="pointer material-icons">search</span>
+                                <span onClick={this.redirectTo("/category/detail/" + item.slug)} className="pointer material-icons">search</span>
                             </TableCell>
                         </TableRow>
                     ))}

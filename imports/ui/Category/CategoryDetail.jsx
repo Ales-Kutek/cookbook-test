@@ -10,9 +10,12 @@ class CategoryDetail extends Component {
     }
 
     mapAndRenderCategory() {
-        let category = Categories.findOne(this.props.id);
 
-        console.log(this.props.id);
+        console.log(Categories.find().fetch());
+
+        let category = Categories.findOne({slug: this.props.slug});
+
+        console.log(this.props.slug);
 
         return (<Category key={category._id} category={category}/>);
     }
@@ -27,11 +30,13 @@ class CategoryDetail extends Component {
 }
 
 CategoryDetail.PropTypes = {
-    id: PropTypes.string.isRequired
+    slug: PropTypes.string.isRequired
 };
 
 export default createContainer((object) => {
+    console.log(object);
+
     return {
-        id: object.match.params["id"]
+        slug: object.match.params["id"]
     };
 }, CategoryDetail);

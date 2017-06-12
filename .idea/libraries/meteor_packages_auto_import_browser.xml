@@ -32,10 +32,12 @@
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/exceptions.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/attrs.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/backcompat.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/todda00_friendly-slugs/0.6.0/web.browser/slugs.coffee" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/events.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/lookup.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/builtins.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/preamble.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/matb33_collection-hooks/0.7.15/web.browser/packages/matb33_collection-hooks.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/domrange.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze-tools/1.0.10/web.browser/tokens.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze-tools/1.0.10/web.browser/tojs.js" />
@@ -186,10 +188,12 @@
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/exceptions.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/attrs.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/backcompat.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/todda00_friendly-slugs/0.6.0/web.browser/slugs.coffee" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/events.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/lookup.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/builtins.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/preamble.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/matb33_collection-hooks/0.7.15/web.browser/packages/matb33_collection-hooks.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.3.2/web.browser/domrange.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze-tools/1.0.10/web.browser/tokens.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze-tools/1.0.10/web.browser/tojs.js" />
